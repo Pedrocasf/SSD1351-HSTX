@@ -35,7 +35,11 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(SSD1351-HSTX src/SSD1351-HSTX.c )
+add_executable(SSD1351-HSTX 
+    src/SSD1351-HSTX.c
+    src/hstx.c
+    src/clocks.c
+)
 
 pico_set_program_name(SSD1351-HSTX "SSD1351-HSTX")
 pico_set_program_version(SSD1351-HSTX "0.1")
