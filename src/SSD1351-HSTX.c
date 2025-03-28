@@ -21,16 +21,22 @@
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "pico/util/queue.h"
-
+#include "hardware/vreg.h"
+#include "hardware/clocks.h"
 #include "hstx.h"
-#include "clocks.h"
+#define SYS_CLK	384000
 #define SCREEN_W 128
 #define SCREEN_H 128
 uint16_t frame_buffer[2][SCREEN_H*SCREEN_W] = {0xFFFF};
 bool draw_buffer = false;
 #define DUMMY_FLAG_VALUE 1
 
-
+void init_sys(){
+    vreg_set_voltage(VREG_VOLTAGE_MAX);
+	sleep_ms(1);
+    set_sys_clock_khz(SYS_CLK, true);
+    stdio_init_all();
+}
 typedef struct
 {
     void (*func)();
